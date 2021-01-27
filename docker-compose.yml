@@ -1,0 +1,41 @@
+version: "3.8"
+services: 
+  php-ssl:
+    build:
+      context: ./apache2/
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./www:/var/www/html
+    networks:
+      - php
+
+networks:
+  php:
+
+volumes:
+  data:
+
+
+  # web:
+  #   image: php:7.3-apache
+  #   restart: unless-stopped
+  #   environment:
+  #     - ALLOW_OVERRIDE=true
+  #   ports:
+  #     - 80:80
+  #     - 433:433
+  #   # links:
+  #   #   - db
+  #   volumes:
+  #     - ./www:/var/www/html/
+  #     - ./ssl.crt:/etc/apache2/ssl/ssl.crt
+  #     - ./ssl.key:/etc/apache2/ssl/ssl.key
+  #   # command: > 
+  #   #   sh -c "
+  #   #   a2enmod rewrite &&
+  #   #   docker-php-ext-install pdo_mysql mysqli &&
+  #   #   cp /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime &&
+  #   #   apache2-foreground"
